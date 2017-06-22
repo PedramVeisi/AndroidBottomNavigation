@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/global_create_relationship"
+        android:icon="@drawable/ic_relationship_black_24dp"
+        android:title="@string/title_global_create_relationship" />
+
+    <item
+        android:id="@+id/global_create_matter"
+        android:icon="@drawable/ic_new_matter_black_24dp"
+        android:title="@string/title_global_create_matter" />
+
+    <item
+        android:id="@+id/global_create_communication"
+        android:icon="@drawable/ic_communication_black_24dp"
+        android:title="@string/title_global_create_communication" />
+
+    <item
+        android:id="@+id/global_create_contact"
+        android:icon="@drawable/ic_contact_black_24dp"
+        android:title="@string/title_global_create_contact" />
+
+    <item
+        android:id="@+id/global_create_note"
+        android:icon="@drawable/ic_note_black_24dp"
+        android:title="@string/title_global_create_note" />
+
+    <item
+        android:id="@+id/global_create_time_entry"
+        android:icon="@drawable/ic_time_entry_black_24dp"
+        android:title="@string/title_global_create_time_entry" />
+
+    <item
+        android:id="@+id/global_create_expense"
+        android:icon="@drawable/ic_expenses_on_black_24dp"
+        android:title="@string/title_global_create_expense" />
+
+    <item
+        android:id="@+id/global_create_task"
+        android:icon="@drawable/ic_tasks_black_24dp"
+        android:title="@string/title_global_create_task" />
+
+    <item
+        android:id="@+id/global_create_event"
+        android:icon="@drawable/ic_calendar_black_24dp"
+        android:title="@string/title_global_create_event" />
+
+</menu>
