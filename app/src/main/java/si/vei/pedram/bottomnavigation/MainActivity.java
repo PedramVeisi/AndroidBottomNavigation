@@ -28,17 +28,19 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         BottomNavigationViewHelper.disableShiftMode(navigation);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        PopupMenu popupMenu = new PopupMenu(MainActivity.this, fab);
+        popupMenu.inflate(R.menu.global_create_menu);
+
+        //noinspection RestrictedApi
+        final MenuPopupHelper menuHelper = new MenuPopupHelper(MainActivity.this,
+                (MenuBuilder) popupMenu.getMenu(), fab);
+        menuHelper.setForceShowIcon(true);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
-                popupMenu.inflate(R.menu.global_create_menu);
-
-                //noinspection RestrictedApi
-                MenuPopupHelper menuHelper = new MenuPopupHelper(MainActivity.this,
-                        (MenuBuilder) popupMenu.getMenu(), view);
-                menuHelper.setForceShowIcon(true);
                 menuHelper.show();
             }
         });
