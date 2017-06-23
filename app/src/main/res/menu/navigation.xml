@@ -21,9 +21,4 @@
         android:icon="@drawable/ic_more_black_24dp"
         android:title="@string/title_more" />
 
-    <item
-        android:id="@+id/navigation_global_create"
-        android:icon="@drawable/ic_global_create_black_24dp"
-        android:title="@string/title_global_create" />
-
 </menu>

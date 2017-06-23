@@ -3,6 +3,7 @@ package si.vei.pedram.bottomnavigation;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
@@ -25,6 +26,23 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
         BottomNavigationViewHelper.disableShiftMode(navigation);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
+                popupMenu.inflate(R.menu.global_create_menu);
+
+                //noinspection RestrictedApi
+                MenuPopupHelper menuHelper = new MenuPopupHelper(MainActivity.this,
+                        (MenuBuilder) popupMenu.getMenu(), view);
+                menuHelper.setForceShowIcon(true);
+                menuHelper.show();
+            }
+        });
+
     }
 
     @Override
@@ -52,21 +70,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             case R.id.navigation_more:
                 mTextMessage.setText(R.string.title_more);
                 return true;
-            case R.id.navigation_global_create:
-
-                item.setChecked(false);
-
-                View menuItemView = findViewById(R.id.navigation_global_create);
-                PopupMenu popupMenu = new PopupMenu(MainActivity.this, menuItemView);
-                popupMenu.inflate(R.menu.global_create_menu);
-
-                //noinspection RestrictedApi
-                MenuPopupHelper menuHelper = new MenuPopupHelper(MainActivity.this,
-                        (MenuBuilder) popupMenu.getMenu(), menuItemView);
-                menuHelper.setForceShowIcon(true);
-                menuHelper.show();
-
-                return false;
         }
         return false;
     }

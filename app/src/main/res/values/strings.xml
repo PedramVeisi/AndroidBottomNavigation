@@ -4,7 +4,7 @@
     <string name="title_calendar">Calendar</string>
     <string name="title_matters">Matters</string>
     <string name="title_more">More</string>
-    <string name="title_global_create">Global Create</string>
+    <string name="title_global_create">Create</string>
     <string name="title_global_create_event">Event</string>
     <string name="title_global_create_task">Task</string>
     <string name="title_global_create_expense">Expense</string>
@@ -14,4 +14,5 @@
     <string name="title_global_create_communication">Communication</string>
     <string name="title_global_create_matter">Matter</string>
     <string name="title_global_create_relationship">Relationship</string>
+    <string name="title_activity_detail">Detail Activity</string>
 </resources>
