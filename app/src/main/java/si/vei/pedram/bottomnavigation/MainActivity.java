@@ -8,17 +8,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
+import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import si.vei.pedram.bottomnavigation.adapter.GlobalCreateAdapter;
+import si.vei.pedram.bottomnavigation.model.GlobalCreateRowItem;
+
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        BottomNavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
 
     private TextView mTextMessage;
+    private ListPopupWindow listPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +58,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                menuHelper.show();
-                //mPopupWindow.showAtLocation(navigation, Gravity.BOTTOM, 0, 0);
-                fab.setVisibility(View.GONE);
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // menuHelper.show();
+//                //mPopupWindow.showAtLocation(navigation, Gravity.BOTTOM, 0, 0);
+//                fab.setVisibility(View.GONE);
+//            }
+//        });
 
 
         mTextMessage.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +94,36 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 //            }
 //        });
 
+        ArrayList<GlobalCreateRowItem> items = new ArrayList<>();
+        items.add(new GlobalCreateRowItem(getString(R.string.title_global_create_event),
+                R.drawable.ic_calendar_black_24dp));
+        items.add(new GlobalCreateRowItem(getString(R.string.title_global_create_task),
+                R.drawable.ic_tasks_black_24dp));
+        items.add(new GlobalCreateRowItem(getString(R.string.title_global_create_expense),
+                R.drawable.ic_expenses_on_black_24dp));
 
+
+        listPopupWindow = new ListPopupWindow(this);
+        listPopupWindow.setAdapter(new GlobalCreateAdapter(this, R.layout.global_create_list_item, items));
+        listPopupWindow.setAnchorView(fab);
+        listPopupWindow.setWidth(300);
+        listPopupWindow.setHeight(400);
+
+        listPopupWindow.setModal(true);
+        listPopupWindow.setOnItemClickListener(this);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                listPopupWindow.show();
+            }
+        });
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view,
+                            int position, long id) {
+        listPopupWindow.dismiss();
+    }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
