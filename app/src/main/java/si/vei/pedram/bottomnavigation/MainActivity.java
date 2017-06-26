@@ -1,5 +1,6 @@
 package si.vei.pedram.bottomnavigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,12 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -21,8 +19,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     private TextView mTextMessage;
-
-    private PopupWindow mPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +33,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        PopupMenu popupMenu = new PopupMenu(MainActivity.this, navigation, Gravity.RIGHT);
+        PopupMenu popupMenu = new PopupMenu(this, navigation, Gravity.RIGHT);
         popupMenu.inflate(R.menu.global_create_menu);
 
         //noinspection RestrictedApi
-        final MenuPopupHelper menuHelper = new MenuPopupHelper(MainActivity.this,
+        final MenuPopupHelper menuHelper = new MenuPopupHelper(this,
                 (MenuBuilder) popupMenu.getMenu(), navigation.findViewById(R.id.navigation_more));
         menuHelper.setForceShowIcon(true);
         menuHelper.setGravity(Gravity.RIGHT);
@@ -63,6 +59,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         });
 
 
+        mTextMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 //        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
