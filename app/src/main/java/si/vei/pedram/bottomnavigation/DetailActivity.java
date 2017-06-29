@@ -23,19 +23,19 @@ public class DetailActivity extends AppCompatActivity {
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        PopupMenu popupMenu = new PopupMenu(this, fab, Gravity.RIGHT);
+        PopupMenu popupMenu = new PopupMenu(this, fab, Gravity.NO_GRAVITY);
         popupMenu.inflate(R.menu.global_create_menu);
 
         //noinspection RestrictedApi
         final MenuPopupHelper menuHelper = new MenuPopupHelper(this,
                 (MenuBuilder) popupMenu.getMenu(), fab);
         menuHelper.setForceShowIcon(true);
-        menuHelper.setGravity(Gravity.RIGHT);
+        menuHelper.setGravity(Gravity.END);
 
         menuHelper.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                fab.setVisibility(View.VISIBLE);
+                fab.show();
             }
         });
 
@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 menuHelper.show();
                 //mPopupWindow.showAtLocation(navigation, Gravity.BOTTOM, 0, 0);
-                fab.setVisibility(View.GONE);
+                fab.hide();
             }
         });
     }
