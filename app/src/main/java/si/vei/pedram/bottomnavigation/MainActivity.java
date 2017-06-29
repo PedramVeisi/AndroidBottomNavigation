@@ -1,6 +1,7 @@
 package si.vei.pedram.bottomnavigation;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -42,30 +43,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        PopupMenu popupMenu = new PopupMenu(this, navigation, Gravity.RIGHT);
-        popupMenu.inflate(R.menu.global_create_menu);
-
-        //noinspection RestrictedApi
-        final MenuPopupHelper menuHelper = new MenuPopupHelper(this,
-                (MenuBuilder) popupMenu.getMenu(), navigation.findViewById(R.id.navigation_more));
-        menuHelper.setForceShowIcon(true);
-        menuHelper.setGravity(Gravity.RIGHT);
-
-        menuHelper.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                fab.setVisibility(View.VISIBLE);
-            }
-        });
-
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // menuHelper.show();
-//                //mPopupWindow.showAtLocation(navigation, Gravity.BOTTOM, 0, 0);
-//                fab.setVisibility(View.GONE);
-//            }
-//        });
+        // Size should be changed based on screen size
+        // check com.android.internal.R.dimen.config_prefDialogWidth
+        int popupMaxWidth = Math.max(getResources().getDisplayMetrics().widthPixels / 2,
+                getResources().getDimensionPixelSize(R.dimen.config_prefDialogWidth));
 
 
         mTextMessage.setOnClickListener(new View.OnClickListener() {
@@ -76,24 +57,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         });
 
-
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//
-//        View customView = inflater.inflate(R.layout.global_create, null);
-//
-//        mPopupWindow = new PopupWindow(
-//                customView,
-//                ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT
-//        );
-
-//        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                fab.setVisibility(View.VISIBLE);
-//            }
-//        });
-
         ArrayList<GlobalCreateRowItem> items = new ArrayList<>();
         items.add(new GlobalCreateRowItem(getString(R.string.title_global_create_event),
                 R.drawable.ic_calendar_black_24dp));
@@ -102,15 +65,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         items.add(new GlobalCreateRowItem(getString(R.string.title_global_create_expense),
                 R.drawable.ic_expenses_on_black_24dp));
 
-
         listPopupWindow = new ListPopupWindow(this);
         listPopupWindow.setAdapter(new GlobalCreateAdapter(this, R.layout.global_create_list_item, items));
         listPopupWindow.setAnchorView(fab);
-        listPopupWindow.setWidth(300);
-        listPopupWindow.setHeight(400);
 
         listPopupWindow.setModal(true);
         listPopupWindow.setOnItemClickListener(this);
+        listPopupWindow.setContentWidth(popupMaxWidth);
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 listPopupWindow.show();
